@@ -177,7 +177,7 @@ local function fn2()
     local enabled = tbl2.Enabled
 
     --=================================================================
-    -- NOTIFIER (kept from SHX)
+    -- NOTIFIER (kept from old script)
     --=================================================================
 
     local function fn4(arg, arg2)
@@ -191,8 +191,8 @@ local function fn2()
 
     --=================================================================
     -- EXTERNAL LOADER
-    -- SHX + Funcs replaced by Rayfield loader.
-    -- The SHX lib and the AhmadV99 Funcs module are no longer used;
+    -- old script + Funcs replaced by Rayfield loader.
+    -- The old script lib and the AhmadV99 Funcs module are no longer used;
     -- Rayfield replaces the whole UI layer.
     --=================================================================
 
@@ -222,12 +222,12 @@ local function fn2()
     end
 
     local tbl3 = {
-        SHX = nil,     -- no longer used
+        old script = nil,     -- no longer used
         Funcs = nil,   -- no longer used
         Rayfield = Rayfield,
     }
 
-    local shx = {
+    local old script = {
         Unloaded = false,
         Rayfield = Rayfield,
     }
@@ -299,7 +299,7 @@ local function fn2()
                     local connection = nil
 
                     connection = arg:Connect(function(...)
-                        if shx.Unloaded then
+                        if old script.Unloaded then
                             if connection then
                                 connection:Disconnect()
                             end
@@ -327,7 +327,7 @@ local function fn2()
                     end
                 end,
                 StartLoop = function(arg, arg2)
-                    while not shx.Unloaded do
+                    while not old script.Unloaded do
                         if enabled[arg] then
                             local ok, result = pcall(arg2)
 
@@ -377,7 +377,7 @@ local function fn2()
         }
 
         --=================================================================
-        -- Modules.DebugInspector  (converted from SHX Gui to Rayfield paragraph)
+        -- Modules.DebugInspector  (converted from old script Gui to Rayfield paragraph)
         --=================================================================
 
         local function fn9()
@@ -415,7 +415,7 @@ local function fn2()
             local v7 = nil
 
             task.spawn(function()
-                while not shx.Unloaded do
+                while not old script.Unloaded do
                     local lastAction = _G.LastAction
 
                     if lastAction and lastAction ~= "" and lastAction ~= v7 then
@@ -478,7 +478,7 @@ local function fn2()
                 tbl6.Gui = SAE.Paragraphs.Diagnostics
 
                 task.spawn(function()
-                    while not shx.Unloaded do
+                    while not old script.Unloaded do
                         tbl6.FrameCount = tbl6.FrameCount + 1
                         local now = os.clock()
 
@@ -11496,7 +11496,7 @@ local function fn2()
             end
 
             task.spawn(function()
-                while not shx.Unloaded do
+                while not old script.Unloaded do
                     if enabled["Auto Farm Drones"] and tbl6.IsFarmingDrone then
                         pcall(tbl6.GetSnapshot, true)
                         task.wait(0.2)
@@ -12312,7 +12312,7 @@ local function fn2()
 	    --=================================================================
     -- PORT 4  —  FULL RAYFIELD UI
     -- Every tab populated. Every callback wired to the same setters
-    -- the SHX original used.
+    -- the old script original used.
     --=================================================================
 
     local Tabs = SAE.Tabs
@@ -13415,7 +13415,7 @@ local function fn2()
             return Tabs.Misc:CreateButton({
                 Name = "Stop & Unload Script",
                 Callback = function()
-                    shx.Unloaded = true
+                    old script.Unloaded = true
                     for _, v in ipairs({
                         "Auto Steal", "Auto Place Egg", "Auto Treadmill", "Auto Hatch",
                         "Auto Sell Pet", "Auto Sell Egg", "Auto Favorite Pet",
@@ -13531,7 +13531,7 @@ local function fn2()
     --=================================================================
 
     task.spawn(function()
-        while not shx.Unloaded do
+        while not old script.Unloaded do
             -- Scramble telemetry
             if SAE.Paragraphs.ScrambleTelemetry and modules.Scramble and modules.Scramble.GetTelemetryText then
                 if enabled["Auto Farm Drones"] then
@@ -13575,7 +13575,7 @@ local function fn2()
     --=================================================================
 
     task.spawn(function()
-        while not shx.Unloaded do
+        while not old script.Unloaded do
             if modules.PetPredictor and modules.PetPredictor.Paragraph then
                 pcall(modules.PetPredictor.UpdateParagraph)
             end
@@ -13584,7 +13584,7 @@ local function fn2()
     end)
 
     task.spawn(function()
-        while not shx.Unloaded do
+        while not old script.Unloaded do
             if modules.FusePredictor and modules.FusePredictor.Paragraph then
                 pcall(modules.FusePredictor.UpdateParagraph)
             end
@@ -13780,7 +13780,7 @@ local function fn2()
 
     local function startLoop(name, body, interval)
         task.spawn(function()
-            while not shx.Unloaded do
+            while not old script.Unloaded do
                 if enabled[name] then
                     local ok, err = pcall(body)
                     if not ok and _G.DebugMode then
@@ -14143,7 +14143,7 @@ local function fn2()
 
     local function loadFunction()
         task.spawn(function()
-            while not shx.Unloaded do
+            while not old script.Unloaded do
                 local ok, result = pcall(orchestrator.Tick)
 
                 if not ok and _G.DebugMode then
@@ -14273,7 +14273,7 @@ local function fn2()
         end
 
         task.spawn(function()
-            while not shx.Unloaded and task.wait(0.1) do
+            while not old script.Unloaded and task.wait(0.1) do
                 local character2 = localPlayer2.Character
 
                 if character2 then
@@ -14287,7 +14287,7 @@ local function fn2()
         end)
 
         task.spawn(function()
-            while not shx.Unloaded and task.wait(0.1) do
+            while not old script.Unloaded and task.wait(0.1) do
                 local character2 = localPlayer2.Character
 
                 if character2 then
@@ -14330,7 +14330,7 @@ local function fn2()
     tbl4.TeleportService = teleportService
     tbl4.CoreGui = coreGui
     tbl4.Players = players
-    tbl4.SHX = shx
+    tbl4.old script = old script
     tbl4.Notify = notify
     tbl4.SetStatus = setStatus
     tbl4.SafeUI = safeUI
