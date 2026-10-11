@@ -7,7 +7,7 @@ repeat
 until game:IsLoaded()
 
 --=====================================================================
--- ANTI-TAMPER (kept as-is from Speed Hub X)
+-- ANTI-TAMPER (kept as-is from )
 --=====================================================================
 
 local tbl
