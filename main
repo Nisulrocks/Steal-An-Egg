@@ -8551,6 +8551,7 @@ local function fn2()
         -- Register all Port 2 modules
         --=================================================================
 
+  		module.Steal = tbl5.Steal
         module.PlaceEgg = tbl5.PlaceEgg
         module.Treadmill = tbl5.Treadmill
         module.Hatch = tbl5.Hatch
@@ -14118,12 +14119,12 @@ local function fn2()
         task.spawn(function()
             local v7, v8 = modules.Game.Init()
             if not v7 then
-                fn4("Game API failed to load: " .. tostring(v8), "SAE Autofarm")
+                notify("SAE", "Game API failed: " .. tostring(v8), 8)
                 return
             end
             task.wait(1)
             if not modules.Game.GetSaveWait() then
-                fn4("Player data failed to load", "SAE Autofarm")
+                notify("SAE", "Player data failed to load", 8)
                 return
             end
 
@@ -14132,7 +14133,7 @@ local function fn2()
                 modules.Game.EggCmds.RequestRuntimeSnapshot()
             end)
 
-            fn4("Game API ready!", "SAE Autofarm")
+            notify("SAE", "Game API ready!", 5)
         end)
     end
 
@@ -14240,7 +14241,12 @@ local function fn2()
             cameraSubject.Health = math.min(health, maxHealth)
 
             for _, v7 in ipairs(Enum.HumanoidStateType:GetEnumItems()) do
-                pcall(cameraSubject.SetStateEnabled, cameraSubject, v7, true)
+                if v7 ~= Enum.HumanoidStateType.None
+                    and v7 ~= Enum.HumanoidStateType.Dead
+                    and v7 ~= Enum.HumanoidStateType.PlatformStanding
+                then
+                    pcall(cameraSubject.SetStateEnabled, cameraSubject, v7, true)
+                end
             end
 
             humanoidRootPart2.AssemblyLinearVelocity = Vector3.zero
